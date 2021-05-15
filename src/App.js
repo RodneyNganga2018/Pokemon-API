@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState} from 'react';
+import Fetch from './components/Fetch';
+import List from './components/List';
 
 function App() {
+  const [pokemon, setPokemon] = useState([]);
+
+  const handleFetch = (names) => {
+    let arr = [];
+    for (let i=0; i<names.length; i++) {
+      arr.push(names[i].name);
+    }
+    setPokemon(arr);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Fetch newFetch={handleFetch}/>
+      <List pokemon={pokemon}/>
     </div>
   );
 }
