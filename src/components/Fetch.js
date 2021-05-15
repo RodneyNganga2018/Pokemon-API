@@ -1,13 +1,14 @@
 import React,{useEffect, useState} from 'react';
 import styles from './Fetch.module.css';
+import axios from 'axios';
 
 const Fetch = (props) => {
-    const [pokemon, getPokemon] = useState(0)
+    const [pokemon, setPokemon] = useState(0)
 
     useEffect( () =>{
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=807&offset=0')
-            .then(response => response.json())
-            .then(response => getPokemon(response.results));
+        axios.get('https://pokeapi.co/api/v2/pokemon?limit=807&offset=0').then(response=>{
+            setPokemon(response.data.results);
+        })
     }, [])
 
     const handleFetch = () => {
